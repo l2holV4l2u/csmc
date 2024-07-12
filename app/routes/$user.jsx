@@ -8,9 +8,14 @@ function percentileRank(data, value) {
     return (rank * 100).toFixed(2);
 }
 
+function mean(data) {
+    const sum = data.reduce((acc, val) => acc + val, 0);
+    return sum / data.length;
+}
+
 const Grid = (prop) => {
     return (
-        <div className="grid grid-cols-3 gap-4">
+        <div className="grid grid-cols-4 gap-4">
             {prop.children}
         </div>
     )
@@ -105,7 +110,7 @@ export default function User() {
     },[user]);
 
     return (
-        <div className="font-sans p-16 flex flex-col items-center h-screen gap-2">
+        <div className="font-sans px-16 pt-16 pb-4 flex flex-col items-center gap-2">
             {/* image head */}
             <div className="flex flex-row items-center justify-center gap-4">
                 <img src="./img/csmc.png" alt="CSMC" className="h-32 w-auto" />
@@ -120,32 +125,42 @@ export default function User() {
                 <Grid>
                     <h1>วิชา</h1>
                     <h1>คะแนน</h1>
-                    <h1>percentile</h1>
+                    <h1>ค่าเฉลี่ย</h1>
+                    <h1>เปอร์เซ็นต์ไทล์</h1>
                 </Grid>
                 <Grid>
                     <h1>ฟิสิกส์</h1>
                     <h1>{phy}</h1>
-                    <h1>{compt ? percentileRank(compt, com) : null}</h1>
+                    <h1>{phypt ? mean(phypt): null}</h1>
+                    <h1>{phypt ? percentileRank(phypt, phy) : null}</h1>
                 </Grid>
                 <Grid>
                     <h1>เคมี</h1>
                     <h1>{chem}</h1>
-                    <h1>{compt ? percentileRank(compt, com) : null}</h1>
+                    <h1>{chempt ? mean(chempt): null}</h1>
+                    <h1>{chempt ? percentileRank(chempt, chem) : null}</h1>
                 </Grid>
                 <Grid>
                     <h1>ชีวะ</h1>
                     <h1>{bio}</h1>
-                    <h1>{compt ? percentileRank(compt, com) : null}</h1>
+                    <h1>{biopt ? mean(biopt): null}</h1>
+                    <h1>{biopt ? percentileRank(biopt, bio) : null}</h1>
                 </Grid>
                 <Grid>
                     <h1>คณิตศาสตร์</h1>
                     <h1>{math}</h1>
-                    <h1>{compt ? percentileRank(compt, com) : null}</h1>
+                    <h1>{mathpt ? mean(mathpt) : null}</h1>
+                    <h1>{mathpt ? percentileRank(mathpt, math) : null}</h1>
                 </Grid>
                 <Grid>
                     <h1>วิทยาการคำนวณ</h1>
                     <h1>{com}</h1>
+                    <h1>{compt ? mean(compt) : null}</h1>
                     <h1>{compt ? percentileRank(compt, com) : null}</h1>
+                </Grid>
+                <Grid>
+                    <h1>คะแนนรวม</h1>
+                    <h1>{phy+chem+bio+math+com}</h1>
                 </Grid>
             </div>
         </div>

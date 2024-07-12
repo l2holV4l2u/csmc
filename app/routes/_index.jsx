@@ -6,7 +6,7 @@ export default function Index() {
   const [workbook, setWorkbook] = useState(null);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [errorCode, setErrorCode] = useState(2); // Initial state for not typing anything
+  const [errorCode, setErrorCode] = useState(2); // initial state for not typing anything
 
   const handleSubmit = (event) => {
     event.preventDefault(); 
@@ -40,9 +40,7 @@ export default function Index() {
       const data = new Uint8Array(arrayBuffer);
       const workbook = xlsx.read(data, { type: 'array' });
       setWorkbook(workbook);
-      console.log(workbook);
     };
-    
     fetchData();
   }, []);
 
