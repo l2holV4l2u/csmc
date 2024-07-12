@@ -9,16 +9,16 @@ export default function Index() {
   const [errorCode, setErrorCode] = useState(2); // Initial state for not typing anything
 
   const handleSubmit = (event) => {
-    event.preventDefault(); // Prevent the default form submission
-    if (!workbook) return; // Workbook not loaded, handle this case
-    const sheetName = workbook.SheetNames[0]; // Assuming the first sheet
+    event.preventDefault(); 
+    if (!workbook) return;
+    const sheetName = workbook.SheetNames[1];
     const sheet = workbook.Sheets[sheetName];
     let errorCode = 0; // 0 = can't find username, 1 = wrong password
     for(let i=3;i<300;i++){
-      const cell = sheet['K'+i];
+      const cell = sheet['M'+i];
       const cellValue = cell ? cell.v : null;
       if(cellValue == username){
-        const cell = sheet['H'+i];
+        const cell = sheet['J'+i];
         const cellValue = cell ? cell.v : null;
         if(cellValue == password){
           window.location.href = '' + Base64.encode(username);
