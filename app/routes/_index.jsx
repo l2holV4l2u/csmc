@@ -22,6 +22,7 @@ export default function Index() {
         const cellValue = cell ? cell.v : null;
         if(cellValue == password){
           window.location.href = '' + Base64.encode(username);
+          errorCode = -1;
         }
         else{
           errorCode = 1;
