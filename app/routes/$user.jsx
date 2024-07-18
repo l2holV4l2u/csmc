@@ -36,6 +36,8 @@ export default function User() {
     const [mathpt,setMathpt] = useState(null);
     const [com,setCom] = useState(null);
     const [compt,setCompt] = useState(null);
+    const [tol, setTol] = useState(null);
+    const [tolpt, setTolpt] = useState(null);
 
     useEffect(() => {
         // set user
@@ -52,7 +54,7 @@ export default function User() {
             const workbook = xlsx.read(data, { type: 'array' });
             const sheetName = workbook.SheetNames[1];
             const sheet = workbook.Sheets[sheetName];
-            let physc = [], chemsc = [], biosc = [], mathsc = [], comsc = [];
+            let physc = [], chemsc = [], biosc = [], mathsc = [], comsc = [], tolsc = [];
             for(let i=2;i<300;i++){
                 const cell = sheet['M'+i];
                 const cellValue = cell ? cell.v : null;
@@ -70,6 +72,9 @@ export default function User() {
                 }
                 if (sheet['U' + i]) {
                     comsc.push(sheet['U' + i].v);
+                }
+                if (sheet['V' + i]) {
+                    tolsc.push(sheet['V' + i].v);
                 }
                 if(cellValue == user){
                     // get name
@@ -98,6 +103,9 @@ export default function User() {
                     if (sheet['U' + i]) {
                         setCom(sheet['U' + i].v);
                     }
+                    if (sheet['V' + i]) {
+                        setTol(sheet['V' + i].v);
+                    }
                 }
             }
             setPhypt(physc);
@@ -105,6 +113,7 @@ export default function User() {
             setBiopt(biosc);
             setMathpt(mathsc);
             setCompt(comsc);
+            setTolpt(tolsc);
         };    
         fetchData();
     },[user]);
@@ -160,7 +169,9 @@ export default function User() {
                 </Grid>
                 <Grid>
                     <h1>คะแนนรวม</h1>
-                    <h1>{phy+chem+bio+math+com}</h1>
+                    <h1>{tol}</h1>
+                    <h1>{tolpt ? mean(tolpt) : null}</h1>
+                    <h1>{tolpt ? percentileRank(tolpt, tol) : null}</h1>
                 </Grid>
             </div>
         </div>
