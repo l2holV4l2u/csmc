@@ -155,13 +155,14 @@ export default function User() {
                     <h1>{tolpt ? mean(tolsc) : null}</h1>
                     <h1>{tolpt}</h1>
                 </Grid>
+                <Grid/>
+                <Grid>
+                    <h1>รางวัล:</h1>
+                    <h1>{medal}</h1>
+                    <h1>ลำดับที่:</h1>
+                    <h1>{pl}</h1>
+                </Grid>
             </div>
-            <Grid>
-                <h1>รางวัล:</h1>
-                <h1>{medal}</h1>
-                <h1>ลำดับที่:</h1>
-                <h1>{pl}</h1>
-            </Grid>
         </div>
     )
 }
