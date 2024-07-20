@@ -38,6 +38,8 @@ export default function User() {
     const [mathsc,setMathsc] = useState(null);
     const [comsc,setComsc] = useState(null);
     const [tolsc,setTolsc] = useState(null);
+    const [medal, setMedal] = useState(null);
+    const [pl, setPl] = useState(null);
 
     useEffect(() => {
         // set user
@@ -81,6 +83,9 @@ export default function User() {
                     setMathpt((sheet['R' + i].v).toFixed(2));
                     setCompt((sheet['T' + i].v).toFixed(2));
                     setTolpt((sheet['AB' + i].v).toFixed(2));
+                    //get medal
+                    setMedal(sheet['AD'+i].v)
+                    setPl(sheet['AC'+i].v)
                 }
             }
             setPhysc(physc);
@@ -150,8 +155,13 @@ export default function User() {
                     <h1>{tolpt ? mean(tolsc) : null}</h1>
                     <h1>{tolpt}</h1>
                 </Grid>
-                
             </div>
+            <Grid>
+                <h1>รางวัล:</h1>
+                <h1>{medal}</h1>
+                <h1>ลำดับที่:</h1>
+                <h1>{pl}</h1>
+            </Grid>
         </div>
     )
 }
