@@ -2,15 +2,9 @@ import { Base64 } from 'js-base64';
 import * as xlsx from 'xlsx';
 import { useEffect, useState } from 'react';
 
-function percentileRank(data, value) {
-    const sortedData = data.sort((a, b) => a - b);
-    const rank = sortedData.findIndex(score => score >= value) / sortedData.length;
-    return (rank * 100).toFixed(2);
-}
-
 function mean(data) {
     const sum = data.reduce((acc, val) => acc + val, 0);
-    return sum / data.length;
+    return (sum / data.length).toFixed(2);
 }
 
 const Grid = (prop) => {
@@ -38,6 +32,12 @@ export default function User() {
     const [compt,setCompt] = useState(null);
     const [tol, setTol] = useState(null);
     const [tolpt, setTolpt] = useState(null);
+    const [physc,setPhysc] = useState(null);
+    const [chemsc,setChemsc] = useState(null);
+    const [biosc,setBiosc] = useState(null);
+    const [mathsc,setMathsc] = useState(null);
+    const [comsc,setComsc] = useState(null);
+    const [tolsc,setTolsc] = useState(null);
 
     useEffect(() => {
         // set user
@@ -52,70 +52,47 @@ export default function User() {
             const arrayBuffer = await response.arrayBuffer();
             const data = new Uint8Array(arrayBuffer);
             const workbook = xlsx.read(data, { type: 'array' });
-            const sheetName = workbook.SheetNames[1];
+            const sheetName = workbook.SheetNames[2];
             const sheet = workbook.Sheets[sheetName];
             let physc = [], chemsc = [], biosc = [], mathsc = [], comsc = [], tolsc = [];
-            for(let i=2;i<300;i++){
-                const cell = sheet['M'+i];
-                const cellValue = cell ? cell.v : null;
-                if (sheet['Q' + i]) {
-                    physc.push(sheet['Q' + i].v);
-                }
-                if (sheet['R' + i]) {
-                    chemsc.push(sheet['R' + i].v);
-                }
-                if (sheet['S' + i]) {
-                    biosc.push(sheet['S' + i].v);
-                }
-                if (sheet['T' + i]) {
-                    mathsc.push(sheet['T' + i].v);
-                }
-                if (sheet['U' + i]) {
-                    comsc.push(sheet['U' + i].v);
-                }
-                if (sheet['V' + i]) {
-                    tolsc.push(sheet['V' + i].v);
-                }
-                if(cellValue == user){
+            for(let i=3;i<=247;i++){
+                physc.push(sheet['U' + i].v);
+                chemsc.push(sheet['W' + i].v);
+                biosc.push(sheet['Y' + i].v);
+                mathsc.push(sheet['Q' + i].v);
+                comsc.push(sheet['S' + i].v);
+                tolsc.push(sheet['AA' + i].v);
+                if(sheet['C'+i].v == user){
                     // get name
-                    if (sheet['D' + i]) {
-                        setTitle(sheet['D' + i].v);
-                    }
-                    if (sheet['E' + i]) {
-                        setFn(sheet['E' + i].v);
-                    }
-                    if (sheet['F' + i]) {
-                        setLn(sheet['F' + i].v);
-                    }
+                    setTitle(sheet['D' + i].v);
+                    setFn(sheet['E' + i].v);
+                    setLn(sheet['F' + i].v);
                     // get score
-                    if (sheet['Q' + i]) {
-                        setPhy(sheet['Q' + i].v);
-                    }
-                    if (sheet['R' + i]) {
-                        setChem(sheet['R' + i].v);
-                    }
-                    if (sheet['S' + i]) {
-                        setBio(sheet['S' + i].v);
-                    }
-                    if (sheet['T' + i]) {
-                        setMath(sheet['T' + i].v);
-                    }
-                    if (sheet['U' + i]) {
-                        setCom(sheet['U' + i].v);
-                    }
-                    if (sheet['V' + i]) {
-                        setTol(sheet['V' + i].v);
-                    }
+                    setPhy(sheet['U' + i].v);
+                    setChem(sheet['W' + i].v);
+                    setBio(sheet['Y' + i].v);
+                    setMath(sheet['Q' + i].v);
+                    setCom(sheet['S' + i].v);
+                    setTol(sheet['AA' + i].v);
+                    //get percentile
+                    setPhypt((sheet['V' + i].v).toFixed(2));
+                    setChempt((sheet['X' + i].v).toFixed(2));
+                    setBiopt((sheet['Z' + i].v).toFixed(2));
+                    setMathpt((sheet['R' + i].v).toFixed(2));
+                    setCompt((sheet['T' + i].v).toFixed(2));
+                    setTolpt((sheet['AB' + i].v).toFixed(2));
                 }
             }
-            setPhypt(physc);
-            setChempt(chemsc);
-            setBiopt(biosc);
-            setMathpt(mathsc);
-            setCompt(comsc);
-            setTolpt(tolsc);
+            setPhysc(physc);
+            setChemsc(chemsc);
+            setBiosc(biosc);
+            setMathsc(mathsc);
+            setComsc(comsc);
+            setTolsc(tolsc);
         };    
-        fetchData();
+        if(user){
+            fetchData();
+        }
     },[user]);
 
     return (
@@ -140,38 +117,38 @@ export default function User() {
                 <Grid>
                     <h1>ฟิสิกส์</h1>
                     <h1>{phy}</h1>
-                    <h1>{phypt ? mean(phypt): null}</h1>
-                    <h1>{phypt ? percentileRank(phypt, phy) : null}</h1>
+                    <h1>{physc ? mean(physc): null}</h1>
+                    <h1>{phypt}</h1>
                 </Grid>
                 <Grid>
                     <h1>เคมี</h1>
                     <h1>{chem}</h1>
-                    <h1>{chempt ? mean(chempt): null}</h1>
-                    <h1>{chempt ? percentileRank(chempt, chem) : null}</h1>
+                    <h1>{chempt ? mean(chemsc): null}</h1>
+                    <h1>{chempt}</h1>
                 </Grid>
                 <Grid>
                     <h1>ชีวะ</h1>
                     <h1>{bio}</h1>
-                    <h1>{biopt ? mean(biopt): null}</h1>
-                    <h1>{biopt ? percentileRank(biopt, bio) : null}</h1>
+                    <h1>{biopt ? mean(biosc): null}</h1>
+                    <h1>{biopt}</h1>
                 </Grid>
                 <Grid>
                     <h1>คณิตศาสตร์</h1>
                     <h1>{math}</h1>
-                    <h1>{mathpt ? mean(mathpt) : null}</h1>
-                    <h1>{mathpt ? percentileRank(mathpt, math) : null}</h1>
+                    <h1>{mathpt ? mean(mathsc) : null}</h1>
+                    <h1>{mathpt}</h1>
                 </Grid>
                 <Grid>
                     <h1>วิทยาการคำนวณ</h1>
                     <h1>{com}</h1>
-                    <h1>{compt ? mean(compt) : null}</h1>
-                    <h1>{compt ? percentileRank(compt, com) : null}</h1>
+                    <h1>{compt ? mean(comsc) : null}</h1>
+                    <h1>{compt}</h1>
                 </Grid>
                 <Grid>
                     <h1>คะแนนรวม</h1>
                     <h1>{tol}</h1>
-                    <h1>{tolpt ? mean(tolpt) : null}</h1>
-                    <h1>{tolpt ? percentileRank(tolpt, tol) : null}</h1>
+                    <h1>{tolpt ? mean(tolsc) : null}</h1>
+                    <h1>{tolpt}</h1>
                 </Grid>
             </div>
         </div>

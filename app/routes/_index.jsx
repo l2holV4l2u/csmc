@@ -14,14 +14,16 @@ export default function Index() {
     const sheetName = workbook.SheetNames[1];
     const sheet = workbook.Sheets[sheetName];
     let errorCode = 0; // 0 = can't find username, 1 = wrong password
-    for(let i=3;i<300;i++){
+    for(let i=2;i<=258;i++){
       const cell = sheet['M'+i];
       const cellValue = cell ? cell.v : null;
       if(cellValue == username){
         const cell = sheet['J'+i];
         const cellValue = cell ? cell.v : null;
         if(cellValue == password){
-          window.location.href = '' + Base64.encode(username);
+          const cell = sheet['C'+i];
+          const cellValue = cell ? cell.v : null;
+          window.location.href = '' + Base64.encode(cellValue);
           errorCode = -1;
         }
         else{
