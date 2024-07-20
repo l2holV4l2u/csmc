@@ -150,6 +150,7 @@ export default function User() {
                     <h1>{tolpt ? mean(tolsc) : null}</h1>
                     <h1>{tolpt}</h1>
                 </Grid>
+                
             </div>
         </div>
     )
