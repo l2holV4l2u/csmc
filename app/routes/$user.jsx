@@ -101,7 +101,7 @@ export default function User() {
     },[user]);
 
     return (
-        <div className="font-sans px-16 pt-16 pb-4 flex flex-col items-center gap-2">
+        <div className="font-sans px-4 pt-16 pb-4 flex flex-col items-center gap-2">
             {/* image head */}
             <div className="flex flex-row items-center justify-center gap-4">
                 <img src="./img/csmc.png" alt="CSMC" className="h-32 w-auto" />
