@@ -115,52 +115,52 @@ export default function User() {
             <div className="gap-4 flex flex-col">
                 <Grid>
                     <h1>วิชา</h1>
-                    <h1>คะแนน</h1>
-                    <h1>ค่าเฉลี่ย</h1>
-                    <h1>เปอร์เซ็นต์ไทล์</h1>
+                    <h1 className="text-center">คะแนน</h1>
+                    <h1 className="text-center">ค่าเฉลี่ย</h1>
+                    <h1 className="text-center">เปอร์เซ็นต์ไทล์</h1>
                 </Grid>
                 <Grid>
                     <h1>ฟิสิกส์</h1>
-                    <h1>{phy}</h1>
-                    <h1>{physc ? mean(physc): null}</h1>
-                    <h1>{phypt}</h1>
+                    <h1 className="font-bold text-center">{phy}</h1>
+                    <h1 className="font-bold text-center">{physc ? mean(physc) : null}</h1>
+                    <h1 className="font-bold text-center">{phypt}</h1>
                 </Grid>
                 <Grid>
                     <h1>เคมี</h1>
-                    <h1>{chem}</h1>
-                    <h1>{chempt ? mean(chemsc): null}</h1>
-                    <h1>{chempt}</h1>
+                    <h1 className="font-bold text-center">{chem}</h1>
+                    <h1 className="font-bold text-center">{chempt ? mean(chemsc) : null}</h1>
+                    <h1 className="font-bold text-center">{chempt}</h1>
                 </Grid>
                 <Grid>
                     <h1>ชีวะ</h1>
-                    <h1>{bio}</h1>
-                    <h1>{biopt ? mean(biosc): null}</h1>
-                    <h1>{biopt}</h1>
+                    <h1 className="font-bold text-center">{bio}</h1>
+                    <h1 className="font-bold text-center">{biopt ? mean(biosc) : null}</h1>
+                    <h1 className="font-bold text-center">{biopt}</h1>
                 </Grid>
                 <Grid>
                     <h1>คณิตศาสตร์</h1>
-                    <h1>{math}</h1>
-                    <h1>{mathpt ? mean(mathsc) : null}</h1>
-                    <h1>{mathpt}</h1>
+                    <h1 className="font-bold text-center">{math}</h1>
+                    <h1 className="font-bold text-center">{mathpt ? mean(mathsc) : null}</h1>
+                    <h1 className="font-bold text-center">{mathpt}</h1>
                 </Grid>
                 <Grid>
                     <h1>วิทยาการคำนวณ</h1>
-                    <h1>{com}</h1>
-                    <h1>{compt ? mean(comsc) : null}</h1>
-                    <h1>{compt}</h1>
+                    <h1 className="font-bold text-center">{com}</h1>
+                    <h1 className="font-bold text-center">{compt ? mean(comsc) : null}</h1>
+                    <h1 className="font-bold text-center">{compt}</h1>
                 </Grid>
                 <Grid>
                     <h1>คะแนนรวม</h1>
-                    <h1>{tol}</h1>
-                    <h1>{tolpt ? mean(tolsc) : null}</h1>
-                    <h1>{tolpt}</h1>
+                    <h1 className="font-bold text-center">{tol}</h1>
+                    <h1 className="font-bold text-center">{tolpt ? mean(tolsc) : null}</h1>
+                    <h1 className="font-bold text-center">{tolpt}</h1>
                 </Grid>
                 <Grid/>
                 <Grid>
                     <h1>รางวัล:</h1>
-                    <h1>{medal}</h1>
-                    <h1>ลำดับที่:</h1>
-                    <h1>{pl}</h1>
+                    <h1 className="font-bold text-center">{medal}</h1>
+                    <h1 className='text-center'>ลำดับที่:</h1>
+                    <h1 className="font-bold text-center">{pl}</h1>
                 </Grid>
             </div>
         </div>
