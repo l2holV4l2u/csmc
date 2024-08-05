@@ -15,10 +15,10 @@ export default function Index() {
     const sheet = workbook.Sheets[sheetName];
     let errorCode = 0; // 0 = can't find username, 1 = wrong password
     for(let i=2;i<=258;i++){
-      const cell = sheet['M'+i];
+      const cell = sheet['J'+i];
       const cellValue = cell ? cell.v : null;
       if(cellValue == username){
-        const cell = sheet['J'+i];
+        const cell = sheet['M'+i];
         const cellValue = cell ? cell.v : null;
         if(cellValue == password){
           const cell = sheet['C'+i];
@@ -65,15 +65,15 @@ export default function Index() {
           className="appearance-none block bg-gray-200 text-gray-700 border border-black rounded-lg py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" 
           type="text"
           value={username}
-          placeholder='email ที่ใช้สมัคร'
+          placeholder='เลขบัตรประชาชน'
           onChange={(e) => setUsername(e.target.value)}
-        />
+        />        
         <label>Password</label>
         <input
           className="appearance-none block bg-gray-200 text-gray-700 border border-black rounded-lg py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" 
           type="text"
           value={password}
-          placeholder='เลขบัตรประชาชน'
+          placeholder='email ที่ใช้สมัคร'
           onChange={(e) => setPassword(e.target.value)}
         />
         <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
