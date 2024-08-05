@@ -14,9 +14,10 @@ export default function Index() {
     const sheetName = workbook.SheetNames[1];
     const sheet = workbook.Sheets[sheetName];
     let errorCode = 0; // 0 = can't find username, 1 = wrong password
-    for(let i=2;i<=258;i++){
+    for(let i=2;i<=259;i++){
       const cell = sheet['J'+i];
       const cellValue = cell ? cell.v : null;
+      console.log(cellValue)
       if(cellValue == username){
         const cell = sheet['M'+i];
         const cellValue = cell ? cell.v : null;
